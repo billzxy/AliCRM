@@ -1,5 +1,6 @@
 package com.rishiqing.AliyunCRM.dao;
 
+import com.rishiqing.AliyunCRM.model.Customer;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -9,10 +10,10 @@ import java.util.List;
  */
 @Repository("customerDao")
 public interface CustomerDao {
-
-        long saveAnimal(Animal animal);
-        long deleteAnimal(Animal animal);
-        List<Animal> getAllAnimals();
-        Animal getAnimalById(String id);
+    long saveCustomer(Customer customer);
+    long updateCustomerById(long id, Customer customer);
+    long deleteCustomerById(long id);
+    Customer getCustomerById(long id);
+    List<Customer> getAllCustomers();
 
 }

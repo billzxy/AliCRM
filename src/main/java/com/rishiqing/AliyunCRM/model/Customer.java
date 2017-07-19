@@ -17,6 +17,32 @@ public class Customer {
     private int rsqLicense;
     private long id;
 
+    public Customer(String name, String phoneNo, String emailAdd, String verificationCode, String customerNote) {
+        this.name = name;
+        this.phoneNo = phoneNo;
+        this.emailAdd = emailAdd;
+        this.verificationCode = verificationCode;
+        this.customerNote = customerNote;
+    }
+    public Customer(String name, String phoneNo, String emailAdd, String verificationCode) {
+        this.name = name;
+        this.phoneNo = phoneNo;
+        this.emailAdd = emailAdd;
+        this.verificationCode = verificationCode;
+    }
+    public Customer(Customer c){
+        this.name = c.name;
+        this.phoneNo = c.phoneNo;
+        this.emailAdd = c.emailAdd;
+        this.verificationCode = c.verificationCode;
+        this.dateCreated = c.dateCreated;
+        this.customerStatus = c.customerStatus;
+        this.customerNote = c.customerNote;
+        this.adminNote = c.adminNote;
+        this.rsqLicense = c.rsqLicense;
+        this.id = c.id;
+    }
+
     public String getName() {
         return name;
     }

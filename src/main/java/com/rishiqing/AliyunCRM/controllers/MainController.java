@@ -21,4 +21,6 @@ public class MainController {
         return "finishedPage";
     }
 
+    @RequestMapping("/addFail")
+    public String addFail(){return "/error/addFailed";}
 }

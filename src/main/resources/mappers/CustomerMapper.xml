@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rishiqing.AliyunCRM.dao.CustomerDao">
+    <resultMap id="customerMap" type="com.rishiqing.AliyunCRM.model.Customer">
+        <id property="id" column="id"/>
+        <result property="name" column="name" />
+        <result property="emailAdd" column="email" />
+        <result property="phoneNo" column="phone"/>
+        <result property="verificationCode" column="verification_code" />
+        <result property="dateCreated" column="date_created" />
+        <result property="customerStatus" column="customer_status"/>
+        <result property="customerNote" column="customer_note" />
+        <result property="adminNote" column="admin_note" />
+        <result property="rsqLicense" column="rsq_license" />
+    </resultMap>
+
+    <insert id="saveCustomer"
+            parameterType="com.rishiqing.AliyunCRM.model.Customer"
+            flushCache="true"
+            keyProperty="id"
+            useGeneratedKeys="true">
+        INSERT INTO `customer`
+        (name,email,phone,verification_code,date_created,customer_note)
+        VALUES
+        (#{name},#{emailAdd},#{phoneNo},#{verificationCode},NOW(),#{customerNote})
+        ON DUPLICATE KEY UPDATE
+        name=#{name},
+        email=#{emailAdd},
+        phone=#{phoneNo},
+        verification_code=#{verificationCode},
+        date_created=NOW(),
+        customer_note=#{customerNote}
+    </insert>
+
+    <select id="getAllCustomers" resultMap="customerMap">
+        SELECT * FROM `customer`
+    </select>
+
+</mapper>
