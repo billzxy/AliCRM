@@ -1,5 +1,6 @@
 package com.rishiqing.AliyunCRM.model;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 /**
@@ -41,6 +42,19 @@ public class Customer {
         this.adminNote = c.adminNote;
         this.rsqLicense = c.rsqLicense;
         this.id = c.id;
+    }
+    public Customer(int id, String name, String emailAdd, String phoneNo, String verificationCode, Timestamp dateCreated,
+                    int customerStatus, String customerNote, String adminNote, int rsqLicense){
+        this.name = name;
+        this.phoneNo = phoneNo;
+        this.emailAdd = emailAdd;
+        this.verificationCode = verificationCode;
+        this.dateCreated = (Date)dateCreated;
+        this.customerStatus = customerStatus;
+        this.customerNote = customerNote;
+        this.adminNote = adminNote;
+        this.rsqLicense = rsqLicense;
+        this.id = id;
     }
 
     public String getName() {

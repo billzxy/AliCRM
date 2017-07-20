@@ -1,12 +1,16 @@
 package com.rishiqing.AliyunCRM.controllers;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.rishiqing.AliyunCRM.model.Customer;
 import com.rishiqing.AliyunCRM.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -32,7 +36,6 @@ public class CustomerController {
 
         long saveStatus = saveCustomer(name, emailAdd, phoneNo, verificationCode, note);
         if(saveStatus==1){
-            System.out.println("saveCustomerInfoWithNote:OK");
             return "ok";
         }else{
             return "failed";
@@ -64,7 +67,38 @@ public class CustomerController {
         return customerService.saveCustomer(customer);
     }
 
+    @RequestMapping(value = "/getAllCustomers", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public String getAllCustomerList(){
+        List<Map<String,Object>> lmso = customerService.getAllCustomers();
+        Map<String,Object> mmp = new HashMap<String, Object>();
+        mmp.put("data",lmso);
+        mmp.put("totalCount",lmso.size());
+        return JSON.toJSONString(mmp);
+    }
 
+    @RequestMapping(value="/customer",method=RequestMethod.GET, produces = "application/json; charset=utf-8")
+    public String getCustomerById(@RequestParam String id, ModelMap mmp){
+        if (id == null || id == "" || !id.matches("^\\d+$")) {
+            //logger.warn("Invalid customerId");
+            return "error/customerInvalidId";
+        }
+        Customer c = customerService.getCustomerById(Integer.parseInt(id));
+        if(c==null){
+            return "error/customerInvalidId";
+        }
+        mmp.addAttribute("name",c.getName());
+        mmp.addAttribute("emailAdd",c.getEmailAdd());
+        mmp.addAttribute("phoneNo",c.getPhoneNo());
+        mmp.addAttribute("verificationCode",c.getVerificationCode());
+        mmp.addAttribute("note",c.getCustomerNote());
+        mmp.addAttribute("adminNote",c.getAdminNote());
+        mmp.addAttribute("status",c.getCustomerStatus());
+        mmp.addAttribute("dateCreated",c.getDateCreated());
+        mmp.addAttribute("id",c.getId());
+        mmp.addAttribute("license",c.getRsqLicense());
+        return "admin/customerDetail";
+    }
 
 
 

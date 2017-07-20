@@ -2,6 +2,7 @@ package com.rishiqing.AliyunCRM.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -22,5 +23,9 @@ public class MainController {
     }
 
     @RequestMapping("/addFail")
-    public String addFail(){return "/error/addFailed";}
+    public String addFail(){return "error/addFailed";}
+
+    @RequestMapping("/adminCustomerInfo")
+    public String admin(){return "admin/customerInfo";}
+
 }

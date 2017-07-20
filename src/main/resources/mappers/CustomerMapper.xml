@@ -37,5 +37,10 @@
     <select id="getAllCustomers" resultMap="customerMap">
         SELECT * FROM `customer`
     </select>
+    <select id="getCustomerById" resultMap="customerMap"
+            parameterType="com.rishiqing.AliyunCRM.model.Customer"
+            flushCache="true">
+        SELECT * FROM `customer` WHERE id=#{id}
+    </select>
 
 </mapper>
