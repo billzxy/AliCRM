@@ -20,7 +20,6 @@
     <script type="text/javascript" src="/js/jquery.bs_pagination.min.js"></script>
     <script type="text/javascript" src="/js/localization/en.min.js"></script>
 
-    <script type="text/javascript" src="/script/showTable.js"></script>
     <script type="text/javascript" src="/script/pageNavi.js"></script>
 </head>
 <body>

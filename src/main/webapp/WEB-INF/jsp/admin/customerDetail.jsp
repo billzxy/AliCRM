@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.js"></script>
 <script type="text/javascript" src="/js/clipboard.min.js"></script>
+<script type="text/javascript" src="/script/copyToClipboard.js"></script>
 <html>
 <head>
     <title>客户信息:${name}</title>
@@ -25,27 +26,7 @@
         <li>注册日期： ${dateCreated}</li>
         <li>客户备注： ${note}</li>
         <li>管理员备注： ${adminNote}</li>
-
     </ul>
+    <button class="historyBack">返回</button>
 </body>
 </html>
-
-<script type="text/javascript">
-    $(document).ready(function () {
-        $("button.js-copy").click(function () {
-            var btn = document.getElementById($(this).attr("id"));
-            var clipboard = new Clipboard(btn);//实例化
-
-            //复制成功执行的回调，可选
-            clipboard.on('success', function (e) {
-                alert("复制成功！");
-            })
-
-            //复制失败执行的回调，可选
-            clipboard.on('error', function (e) {
-                    alert("复制失败！");
-                }
-            )
-        })
-    });
-</script>

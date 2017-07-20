@@ -26,6 +26,10 @@
             <p>* 为必填项目</p>
             <button type="button" id="submitButton">提交</button>
         </ul>
+    <div><a href="/login">管理员登录</a></div>
+    <div>
+        <p>联系我们：<a href="http://www.rishiqing.com/">日事清</a></p>
+    </div>
     <!--TODO:加些联系信息 链接到日事清官网-->
 </body>
 </html>
