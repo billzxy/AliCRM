@@ -1,7 +1,6 @@
 package com.rishiqing.AliyunCRM.controllers;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.rishiqing.AliyunCRM.model.Customer;
 import com.rishiqing.AliyunCRM.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,11 +80,11 @@ public class CustomerController {
     public String getCustomerById(@RequestParam String id, ModelMap mmp){
         if (id == null || id == "" || !id.matches("^\\d+$")) {
             //logger.warn("Invalid customerId");
-            return "error/customerInvalidId";
+            return "error/invalidCustomerId";
         }
         Customer c = customerService.getCustomerById(Integer.parseInt(id));
         if(c==null){
-            return "error/customerInvalidId";
+            return "error/invalidCustomerId";
         }
         mmp.addAttribute("name",c.getName());
         mmp.addAttribute("emailAdd",c.getEmailAdd());
@@ -100,6 +99,35 @@ public class CustomerController {
         return "admin/customerDetail";
     }
 
+    @RequestMapping(value = "/getCustomers", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public String getCustomerByBatch(@RequestBody Map<String,Object> map){
+        String max = (String)map.get("max");
+        String page = (String)map.get("page");
+        if (max == null || max == "" || !max.matches("^\\d+$")) {
+            //logger.warn("Invalid customerId");
+            return "error/invalidPageRequest";
+        }
+        if (page == null || page == "" || !page.matches("^\\d+$")) {
+            //logger.warn("Invalid customerId");
+            return "error/invalidPageRequest";
+        }
+        int showMax = Integer.parseInt(max);
+        int pageN = Integer.parseInt(page);
+        if(pageN<=0){
+            return "error/invalidPageRequest";
+        }
+        int offset = (pageN-1)*showMax;
+        List<Map<String,Object>> lmso = customerService.getCustomerByBatch(showMax,offset);
+        Map<String,Object> mmp = new HashMap<String, Object>();
+        mmp.put("data",lmso);
+        return JSON.toJSONString(mmp);
+    }
 
+    @RequestMapping(value = "/getCustomerCount", method = RequestMethod.GET)
+    @ResponseBody
+    public String getCustomerCount(){
+        return String.valueOf( customerService.getCustomerCount());
+    }
 
 }

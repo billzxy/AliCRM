@@ -1,20 +1,58 @@
 /**
  * Created by 117_John on 7/19/2017.
  */
-var length;
 var data=[];
 
-//var $tbody = $("#customerTable");
+var length;
 
 $(document).ready(function(){
     //$("#customerTable tr").hide();
+    pageRequest = {
+        "offset": page,
+        "showMax":max
+    }
+    $.ajax(
+        {
+            url:"/getCustomerCount",
+            type:"GET",
+            dataType:"text",
+            timeout:60000,
+            error: function (data) {alert("获取客户信息失败！");},
+            success: function (result) {
+                var customerMap = result;
+                length = customerMap.totalCount;
+                if(length===0){
+                    //$("#msg").html("无用户信息");
+                }else{
+                    var dataList=[];
+                    var listOfCustomer = customerMap.data;
+                    for(var  i=0;i<listOfCustomer.length;i++) {
+                        var rsqLicense = getRsqLicense(listOfCustomer[i].license);
+                        var customerStatus = getStatus(listOfCustomer[i].status);
+                        var tr = "<tr>" +
+                            "<td>"+listOfCustomer[i].name+"</td>" +
+                            "<td>"+listOfCustomer[i].phoneNo+"</td>" +
+                            "<td>"+listOfCustomer[i].emailAdd+"</td>" +
+                            "<td>"+rsqLicense+"</td>" +
+                            "<td>"+customerStatus+"</td>" +
+                            "<td><a href="+"/customer?id="+listOfCustomer[i].id+">详情</a> </td>" +
+                            "</tr>";
+                        data.push(tr);
+                    }
+                    showPageNavi()
+                }
+
+            }
+        });
         $.ajax(
             {
                 url:"/getAllCustomers",
                 type:"GET",
+                data:JSON.stringify(pageRequest),
+                contentType:"application/json",
                 dataType:"text",
                 timeout:60000,
-                error: function (data) {alert("获取客户信息失败！"+data);},
+                error: function (data) {alert("获取客户信息失败！");},
                 success: function (result) {
                     var customerMap = JSON.parse(result);
                     length = customerMap.totalCount;

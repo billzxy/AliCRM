@@ -42,5 +42,13 @@
             flushCache="true">
         SELECT * FROM `customer` WHERE id=#{id}
     </select>
+    <select id="getCustomerByBatch" resultMap="customerMap"
+            parameterType="com.rishiqing.AliyunCRM.model.Customer"
+            flushCache="true">
+        SELECT * FROM `customer` ORDER BY id DESC LIMIT #{offset},#{max}
+    </select>
+    <select id="getCustomerCount">
+        SELECT COUNT(*) FROM `customer`
+    </select>
 
 </mapper>

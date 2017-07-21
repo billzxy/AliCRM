@@ -15,5 +15,7 @@ public interface CustomerDao {
     long deleteCustomerById(long id);
     Customer getCustomerById(long id);
     List<Customer> getAllCustomers();
+    List<Customer> getCustomerByBatch(int max, int offset);
+    long getCustomerCount();
 
 }

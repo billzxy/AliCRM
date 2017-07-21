@@ -54,5 +54,28 @@ public class CustomerService {
         }
         return customers;
     }
+    public List<Map<String,Object>> getCustomerByBatch(int showMax, int offset){
+        List<Customer> lc = customerDao.getCustomerByBatch(showMax, offset);
+        List<Map<String,Object>> customers = new ArrayList<Map<String, Object>>();
+        for(Customer c : lc){
+            Map<String,Object> mmp = new HashMap<String, Object>();
+            mmp.put("name",c.getName());
+            mmp.put("emailAdd",c.getEmailAdd());
+            mmp.put("phoneNo",c.getPhoneNo());
+            mmp.put("verificationCode",c.getVerificationCode());
+            mmp.put("note",c.getCustomerNote());
+            mmp.put("adminNote",c.getAdminNote());
+            mmp.put("status",c.getCustomerStatus());
+            mmp.put("dateCreated",c.getDateCreated());
+            mmp.put("id",c.getId());
+            mmp.put("license",c.getRsqLicense());
+            customers.add(mmp);
+        }
+        return customers;
+    }
+
+    public long getCustomerCount(){
+        return customerDao.getCustomerCount();
+    }
 
 }
