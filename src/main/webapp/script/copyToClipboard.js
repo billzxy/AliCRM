@@ -17,6 +17,7 @@ $(document).ready(function () {
             }
         )
     });
+
     $("button.historyBack").click(
         function () {
             history.back(1);

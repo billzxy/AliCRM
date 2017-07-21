@@ -43,11 +43,11 @@
         SELECT * FROM `customer` WHERE id=#{id}
     </select>
     <select id="getCustomerByBatch" resultMap="customerMap"
-            parameterType="com.rishiqing.AliyunCRM.model.Customer"
+            parameterType="java.lang.Integer"
             flushCache="true">
-        SELECT * FROM `customer` ORDER BY id DESC LIMIT #{offset},#{max}
+        SELECT * FROM `customer` ORDER BY id DESC LIMIT #{1},#{0}
     </select>
-    <select id="getCustomerCount">
+    <select id="getCustomerCount" resultType="java.lang.Long">
         SELECT COUNT(*) FROM `customer`
     </select>
 

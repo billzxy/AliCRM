@@ -11,7 +11,7 @@
     <meta charset="utf-8">
     <title>日事清客户信息录入</title>
     <!--TODO：封装jquery-->
-    <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.js"></script>
+    <script type="text/javascript" src="/js/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="/script/customerInfoInput.js"></script>
 </head>
 <body>

@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="/js/clipboard.min.js"></script>
 <script type="text/javascript" src="/script/copyToClipboard.js"></script>
 <html>
@@ -16,6 +16,7 @@
 </head>
 <body>
     <h2>客户详细信息：</h2>
+
     <ul>
         <li>姓名： ${name}<button id="b1" class="js-copy" data-clipboard-text="${name}">点击复制</button></li>
         <li>Email地址： ${emailAdd}<button id="b2" class="js-copy" data-clipboard-text="${emailAdd}">点击复制</button></li>
@@ -27,6 +28,6 @@
         <li>客户备注： ${note}</li>
         <li>管理员备注： ${adminNote}</li>
     </ul>
-    <button class="historyBack">返回</button>
+    <a href="/adminCustomerInfo">返回</a>
 </body>
 </html>

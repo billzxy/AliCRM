@@ -99,23 +99,22 @@ public class CustomerController {
         return "admin/customerDetail";
     }
 
-    @RequestMapping(value = "/getCustomers", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+    @RequestMapping(value = "/getCustomer", method = RequestMethod.POST, produces ="application/json; charset=utf-8")
     @ResponseBody
     public String getCustomerByBatch(@RequestBody Map<String,Object> map){
-        String max = (String)map.get("max");
-        String page = (String)map.get("page");
-        if (max == null || max == "" || !max.matches("^\\d+$")) {
+        Integer showMax = (Integer) map.get("max");
+        Integer pageN = Integer.parseInt((String)map.get("page"));
+        /*if (max == null || max == "" || !max.matches("^\\d+$")) {
             //logger.warn("Invalid customerId");
-            return "error/invalidPageRequest";
+            return null;
         }
         if (page == null || page == "" || !page.matches("^\\d+$")) {
             //logger.warn("Invalid customerId");
-            return "error/invalidPageRequest";
-        }
-        int showMax = Integer.parseInt(max);
-        int pageN = Integer.parseInt(page);
+            return null;
+        }*/
+
         if(pageN<=0){
-            return "error/invalidPageRequest";
+            return null;
         }
         int offset = (pageN-1)*showMax;
         List<Map<String,Object>> lmso = customerService.getCustomerByBatch(showMax,offset);

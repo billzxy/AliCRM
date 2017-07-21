@@ -6,7 +6,6 @@ var phone;
 var email;
 var code;
 var note;
-var contextPath = "${pageContext.request.contextPath}";
 $(document).ready(function(){
     $("#submitButton").click(function () {
         getInputs();
