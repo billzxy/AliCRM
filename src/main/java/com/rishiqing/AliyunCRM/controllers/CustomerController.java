@@ -129,4 +129,23 @@ public class CustomerController {
         return String.valueOf( customerService.getCustomerCount());
     }
 
+    @RequestMapping(value="/search",method=RequestMethod.GET)
+    @ResponseBody
+    public String search(@RequestBody Map<String,Object> map){
+        String name = (String)map.get("name");
+        String emailAdd = (String)map.get("emailAdd");
+        String phoneNo = (String)map.get("phoneNo");
+        String verificationCode = (String)map.get("verificationCode");
+        Integer rsqLicense = Integer.parseInt((String)map.get("rsqLicense"));
+        Integer status = Integer.parseInt((String)map.get("status"));
+        Integer max = Integer.parseInt((String)map.get("max"));
+        List<Map<String,Object>> lmso = customerService.searchCustomer();
+        if(c==null){
+            return "error/invalidCustomerId";
+        }
+
+    }
+
+    private List<Map<String,Object>>
+
 }

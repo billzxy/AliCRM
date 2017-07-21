@@ -124,7 +124,7 @@ function checkPhone(){
     if(phone.length<10||phone.length>11){
         return false;
     }
-    return !pattern.test(phone);
+    return "^\\d+$".test(phone);
 }
 
 function checkEmail() {

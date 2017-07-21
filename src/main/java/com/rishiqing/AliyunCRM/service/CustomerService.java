@@ -78,4 +78,5 @@ public class CustomerService {
         return customerDao.getCustomerCount();
     }
 
+    public List<Map<String,Object>> searchCustomer(, int offset){
 }
