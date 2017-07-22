@@ -129,23 +129,19 @@ public class CustomerController {
         return String.valueOf( customerService.getCustomerCount());
     }
 
-    @RequestMapping(value="/search",method=RequestMethod.GET)
+    @RequestMapping(value="/search",method=RequestMethod.POST, produces ="application/json; charset=utf-8")
     @ResponseBody
     public String search(@RequestBody Map<String,Object> map){
-        String name = (String)map.get("name");
-        String emailAdd = (String)map.get("emailAdd");
-        String phoneNo = (String)map.get("phoneNo");
-        String verificationCode = (String)map.get("verificationCode");
-        Integer rsqLicense = Integer.parseInt((String)map.get("rsqLicense"));
-        Integer status = Integer.parseInt((String)map.get("status"));
-        Integer max = Integer.parseInt((String)map.get("max"));
-        List<Map<String,Object>> lmso = customerService.searchCustomer();
-        if(c==null){
-            return "error/invalidCustomerId";
+        map.put("status",Integer.parseInt((String)map.get("status")));
+        map.put("rsqLicense",Integer.parseInt((String)map.get("rsqLicense")));
+        map.put("maxResult",Integer.parseInt((String)map.get("maxResult")));
+        List l =customerService.searchCustomer(map);
+        if(l==null){
+            return "error";
         }
-
+        String s=  JSON.toJSONString(l);
+        return s;
     }
 
-    private List<Map<String,Object>>
 
 }

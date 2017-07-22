@@ -16,6 +16,7 @@
         <result property="rsqLicense" column="rsq_license" />
     </resultMap>
 
+
     <insert id="saveCustomer"
             parameterType="com.rishiqing.AliyunCRM.model.Customer"
             flushCache="true"
@@ -49,6 +50,32 @@
     </select>
     <select id="getCustomerCount" resultType="java.lang.Long">
         SELECT COUNT(*) FROM `customer`
+    </select>
+
+    <select id="searchCustomer" parameterType="map" resultMap="customerMap">
+        SELECT * FROM `customer`
+        <where>
+        <if test='name!=null and name!=""'>
+            name LIKE "%${name}%"
+        </if>
+        <if test='phoneNo!=null and phoneNo!=""'>
+            OR phone LIKE "%${phoneNo}%"
+        </if>
+        <if test='emailAdd!=null and emailAdd!=""'>
+            OR email LIKE "%${emailAdd}%"
+        </if>
+        <if test='verificationCode!=null and verificationCode!=""'>
+            OR verification_code = #{verificationCode}
+        </if>
+        <if test='rsqLicense!=4'>
+            AND rsq_license = #{rsqLicense}
+        </if>
+        <if test='status!=4'>
+            AND customer_status = #{status}
+        </if>
+        </where>
+        ORDER BY id DESC
+        LIMIT #{maxResult}
     </select>
 
 </mapper>
