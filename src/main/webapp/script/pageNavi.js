@@ -8,10 +8,10 @@ var showMax=10;
 var onPage="1";
 var pageCount;
 var isPageBarReady=false;
+var maxSearchResult=10;
 
 
-
-$(document).ready(function getPageCount(){
+$(document).ready(function(){
     $.ajax({
         url:"/getCustomerCount",
         type:"GET",
@@ -19,18 +19,78 @@ $(document).ready(function getPageCount(){
         timeout:60000,
         error: function (data) {alert("获取客户信息失败！");},
         success: function (result) {
-            dataCount = result;;
+            dataCount = result;
             showPageBar();
             getData();
         }
     });
-    $("#submit_search").click(
-        function () {
-            
-        }
-    )
+    $('button#submit_search_button').click(function(){search()});
 });
 
+function search() {
+    var name = $("#name_search").val();
+    var phone = $("#phone_search").val();
+    var email = $("#email_search").val();
+    var code = $("#code_search").val();
+    var license = $("#license_selection").val();
+    var status = $("#status_selection").val();
+
+    if((name===''&&phone===''&&email===''&&code===''&&status==="4"&&license==="4")
+        ||(typeof(name)==="undefined"&&typeof(phone)==="undefined"&&typeof(email)==="undefined"
+        &&typeof(code)==="undefined"&&typeof(status)==="undefined"&&typeof(license)==="undefined")){
+        alert("请至少选择一项搜索选项");
+    }else if(phone!==''&&typeof(phone)!=="undefined"&&!checkPhone(phone)){
+            alert("手机号输入有误");
+            $('#searchResultTable tbody').empty();
+            $('.modal fade').hide();
+    }else{
+        maxSearchResult = $("#search_max").val();
+        var dataMap = {
+            "name":name,
+            "phoneNo":phone,
+            "emailAdd":email,
+            "verificationCode":code,
+            "rsqLicense":license,
+            "status":status,
+            "maxResult":maxSearchResult
+        };
+        $.ajax({
+            url:"/search",
+            type:"POST",
+            data:JSON.stringify(dataMap),
+            contentType:"application/json;charset=utf-8",
+            dataType:"text",
+            timeout:60000,
+            error: function (data) {alert("获取客户信息失败！");},
+            success: function (result) {
+                if(result==="error"){alert("错误");return;}
+                var customerMap = JSON.parse(result);
+                if(customerMap.totalCount===0){
+                    $('#searchResultTable tbody').empty();
+                    $("#searchResultTable tbody").html("未搜索到用户");
+                }else{
+                    $('#searchResultTable tbody').empty();
+                    var listOfCustomer = customerMap;
+                    for(var  i=0;i<listOfCustomer.length;i++) {
+                        var rsqLicense = getRsqLicense(listOfCustomer[i].license);
+                        var customerStatus = getStatus(listOfCustomer[i].status);
+                        var tr = "<tr>" +
+                            "<td>"+listOfCustomer[i].name+"</td>" +
+                            "<td>"+listOfCustomer[i].phoneNo+"</td>" +
+                            "<td>"+listOfCustomer[i].emailAdd+"</td>" +
+                            "<td>"+rsqLicense+"</td>" +
+                            "<td>"+customerStatus+"</td>" +
+                            "<td><a href="+"/customer?id="+listOfCustomer[i].id+">详情</a> </td>" +
+                            "</tr>";
+                        $('#searchResultTable tbody').append(tr);
+                        $('.modal fade').show();
+                    }
+                }
+
+            }
+        })
+    }
+}
 
 function showPageBar(){
     pageCount = Math.ceil(dataCount/showMax);
@@ -55,6 +115,10 @@ function showPage(){
             }
         }
     );
+
+}
+function checkPhone(phone){
+    return /^[0-9]*$/.test(phone);
 }
 
 

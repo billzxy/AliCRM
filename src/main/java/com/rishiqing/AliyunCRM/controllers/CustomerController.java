@@ -129,4 +129,19 @@ public class CustomerController {
         return String.valueOf( customerService.getCustomerCount());
     }
 
+    @RequestMapping(value="/search",method=RequestMethod.POST, produces ="application/json; charset=utf-8")
+    @ResponseBody
+    public String search(@RequestBody Map<String,Object> map){
+        map.put("status",Integer.parseInt((String)map.get("status")));
+        map.put("rsqLicense",Integer.parseInt((String)map.get("rsqLicense")));
+        map.put("maxResult",Integer.parseInt((String)map.get("maxResult")));
+        List l =customerService.searchCustomer(map);
+        if(l==null){
+            return "error";
+        }
+        String s=  JSON.toJSONString(l);
+        return s;
+    }
+
+
 }
