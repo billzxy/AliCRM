@@ -8,6 +8,7 @@ var code;
 var note;
 $(document).ready(function(){
     $("#submitButton").click(function () {
+        $("#submitButton").disabled=true;
         getInputs();
         var areInputsChecked = checkInputs();
         if(areInputsChecked){
