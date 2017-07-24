@@ -12,10 +12,10 @@
 <head>
     <meta charset="utf-8">
     <title>失败！</title>
-    <link rel="shortcut icon" href="/images/rsq.ico"/>
+    <link rel="shortcut icon" href="<%=request.getContextPath()%>/images/rsq.ico"/>
 </head>
 <body>
     <h2>信息添加失败，请重试！</h2>
-    <a href="/registration">返回</a>
+    <a href="<%=request.getContextPath()%>/registration">返回</a>
 </body>
 </html>

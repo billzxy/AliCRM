@@ -31,7 +31,7 @@ function submitInfoWithNote() {
     };
     $.ajax(
         {
-            url:"/saveInfoWNote",
+            url:"saveInfoWNote",
             type:"POST",
             data:JSON.stringify(dataJson),
             contentType:"application/json",
@@ -57,7 +57,7 @@ function submitInfo(){
     };
     $.ajax(
         {
-            url:"/saveInfo",
+            url:"saveInfo",
             type:"POST",
             data:JSON.stringify(dataJson),
             contentType:"application/json",
@@ -75,10 +75,10 @@ function submitInfo(){
     )
 }
 function redirectSuccess(){
-    window.location.replace("/finished");
+    window.location.replace("finished");
 }
 function redirectFailed() {
-    window.location.replace("/addFail")
+    window.location.replace("addFail")
 }
 
 function getInputs() {

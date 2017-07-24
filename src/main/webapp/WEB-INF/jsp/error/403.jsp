@@ -10,10 +10,10 @@
 
 <html>
 <head>
-    <link rel="shortcut icon" href="/images/rsq.ico"/>
+    <link rel="shortcut icon" href="<%=request.getContextPath()%>/images/rsq.ico"/>
     <title>403</title>
 </head>
 <body>
-    <img src="/images/403.jpg" alt="不4让0进3">
+    <img src="<%=request.getContextPath()%>/images/403.jpg" alt="不4让0进3">
 </body>
 </html>

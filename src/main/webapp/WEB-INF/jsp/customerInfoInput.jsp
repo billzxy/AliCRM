@@ -11,9 +11,9 @@
 <head>
     <meta charset="utf-8">
     <title>日事清新用户注册</title>
-    <link rel="shortcut icon" href="/images/rsq.ico"/>
-    <script type="text/javascript" src="/js/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="/script/customerInfoInput.js"></script>
+    <link rel="shortcut icon" href="<%=request.getContextPath()%>/images/rsq.ico"/>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/script/customerInfoInput.js"></script>
 </head>
 <body>
     <h2>欢迎使用日事清</h2>
@@ -27,7 +27,7 @@
             <p>* 为必填项目</p>
             <button type="button" id="submitButton">提交</button>
         </ul>
-    <div><a href="/login">管理员登录</a></div>
+    <div><a href="<%=request.getContextPath()%>/login">管理员登录</a></div>
     <div>
         <p>日事清官方网站：<a href="http://www.rishiqing.com/">日事清</a></p>
     </div>

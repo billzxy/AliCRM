@@ -18,7 +18,7 @@ $(document).ready(function(){
             }
         });
     $.ajax({
-        url:"/getCustomerCount",
+        url:"getCustomerCount",
         type:"GET",
         dataType:"text",
         timeout:60000,
@@ -65,7 +65,7 @@ function search() {
             }
         });
         $.ajax({
-            url:"/search",
+            url:"search",
             type:"POST",
             data:JSON.stringify(dataMap),
             contentType:"application/json;charset=utf-8",
@@ -90,7 +90,7 @@ function search() {
                             "<td>"+listOfCustomer[i].emailAdd+"</td>" +
                             "<td>"+rsqLicense+"</td>" +
                             "<td>"+customerStatus+"</td>" +
-                            "<td><a href="+"/customer?id="+listOfCustomer[i].id+">详情</a> </td>" +
+                            "<td><a href="+"customer?id="+listOfCustomer[i].id+">详情</a> </td>" +
                             "</tr>";
                         $('#searchResultTable tbody').append(tr);
                         $('.modal fade').show();
@@ -144,7 +144,7 @@ function getData(){
     });
     $.ajax(
         {
-            url:"/getCustomer",
+            url:"getCustomer",
             type:"POST",
             data:JSON.stringify(pageRequest),
             contentType:"application/json",
@@ -167,7 +167,7 @@ function getData(){
                             "<td>"+listOfCustomer[i].emailAdd+"</td>" +
                             "<td>"+rsqLicense+"</td>" +
                             "<td>"+customerStatus+"</td>" +
-                            "<td><a href="+"/customer?id="+listOfCustomer[i].id+">详情</a> </td>" +
+                            "<td><a href="+"customer?id="+listOfCustomer[i].id+">详情</a> </td>" +
                             "</tr>";
                         $('#customerTable tbody').append(tr);
                     }

@@ -11,11 +11,11 @@
 <head>
     <meta charset="utf-8">
     <title>成功！</title>
-    <link rel="shortcut icon" href="/images/rsq.ico"/>
+    <link rel="shortcut icon" href="<%=request.getContextPath()%>/images/rsq.ico"/>
 </head>
 <body>
     <h2>信息添加成功，即将为您创建账户</h2>
     <h2>感谢您使用日事清，日事清：您理想的工作方式</h2>
-    <a href="/">返回</a>
+    <a href="<%=request.getContextPath()%>/">返回</a>
 </body>
 </html>

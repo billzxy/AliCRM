@@ -7,15 +7,15 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page session="true"%>
-
+<%String path = request.getContextPath();%>
 
 <html>
 <head>
-    <link rel="shortcut icon" href="/images/rsq.ico"/>
-    <script type="text/javascript" src="/js/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="/js/clipboard.min.js"></script>
-    <script type="text/javascript" src="/script/copyToClipboard.js"></script>
-    <script type="text/javascript" src="/script/modifyCustomerInfo.js"></script>
+    <link rel="shortcut icon" href="<%=path%>/images/rsq.ico"/>
+    <script type="text/javascript" src="<%=path%>/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="<%=path%>/js/clipboard.min.js"></script>
+    <script type="text/javascript" src="<%=path%>/script/copyToClipboard.js"></script>
+    <script type="text/javascript" src="<%=path%>/script/modifyCustomerInfo.js"></script>
     <title>客户信息:${name}</title>
     <meta name="csrf-token" content="${_csrf.token}">
     <meta name="csrf-name" content="${_csrf.parameterName}">

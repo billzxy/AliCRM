@@ -1,4 +1,4 @@
-<%@ page import="com.rishiqing.AliyunCRM.model.Admin" %><%--
+ <%--
   Created by IntelliJ IDEA.
   User: 117_John
   Date: 7/20/2017
@@ -10,9 +10,9 @@
 <html>
 <head>
     <title>登录</title>
-    <link rel="shortcut icon" href="/images/rsq.ico"/>
-    <script type="text/javascript" src="/js/jquery-3.2.1.min.js"></script>
-    <!--<script type="text/javascript" src="/script/loginAuth.js"></script>-->
+    <link rel="shortcut icon" href="<%=request.getContextPath()%>/images/rsq.ico"/>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-3.2.1.min.js"></script>
+
 
     <style>
         .error {
@@ -83,7 +83,7 @@
                                            value="登录" /></td>
                 </tr>
             </table>
-            <a href="/">返回</a>
+            <a href="<%=request.getContextPath()%>/">返回</a>
             <input type="hidden" name="${_csrf.parameterName}"
                    value="${_csrf.token}" />
 

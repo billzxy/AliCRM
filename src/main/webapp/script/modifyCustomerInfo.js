@@ -38,7 +38,7 @@ $(document).ready(function () {
             }
         });
         $.ajax({
-            url:"/modify",
+            url:"modify",
             type:"POST",
             data:JSON.stringify(dataMap),
             contentType:"application/json;charset=utf-8",
@@ -58,12 +58,12 @@ $(document).ready(function () {
         if(!isSaved){
             var exitDecision = confirm("尚未保存修改,是否确定离开？");
             if(exitDecision){
-                window.location.href="/adminCustomerInfo";
+                window.location.href="adminCustomerInfo";
             }else{
                 return ;
             }
         }else{
-            window.location.href="/adminCustomerInfo";
+            window.location.href="adminCustomerInfo";
         }
     })
 });
