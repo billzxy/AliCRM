@@ -12,6 +12,11 @@ var maxSearchResult=10;
 
 
 $(document).ready(function(){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
     $.ajax({
         url:"/getCustomerCount",
         type:"GET",
@@ -54,6 +59,11 @@ function search() {
             "status":status,
             "maxResult":maxSearchResult
         };
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
         $.ajax({
             url:"/search",
             type:"POST",
@@ -127,7 +137,11 @@ function getData(){
         "page": onPage,
         "max":showMax
     };
-
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
     $.ajax(
         {
             url:"/getCustomer",

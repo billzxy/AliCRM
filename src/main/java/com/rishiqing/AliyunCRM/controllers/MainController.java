@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class MainController {
 
-    @RequestMapping("/registration")
+    @RequestMapping("/")
     public String registrate(){return "customerInfoInput";}
 
     @RequestMapping("/finished")
@@ -23,5 +23,14 @@ public class MainController {
 
     @RequestMapping("/addFail")
     public String addFail(){return "error/addFailed";}
+
+    @RequestMapping("/NotFound")
+    public String fourohfour(){return "error/404";}
+
+    @RequestMapping("/Denied")
+    public String fivehundred(){return "error/500";}
+
+    @RequestMapping("/Forbidden")
+    public String fourohthree(){return "error/403";}
 
 }

@@ -6,10 +6,14 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page session="true"%>
 <html>
 <head>
     <meta charset="utf-8">
-    <title>主页</title>
+    <meta name="csrf-token" content="${_csrf.token}">
+    <meta name="csrf-name" content="${_csrf.parameterName}">
+    <title>日事清阿里云市场注册用户</title>
     <link rel="shortcut icon" href="/images/rsq.ico"/>
     <script type="text/javascript" src="/js/jquery-3.2.1.min.js"></script>
     <!--  BOOTSTRAP -->
@@ -23,7 +27,31 @@
     <script type="text/javascript" src="/script/pageNavi.js"></script>
 </head>
 <body>
+    <style type="text/css">
+        h3 {
+            float: right;
+        }
+    </style>
+    <c:url value="/j_spring_security_logout" var="logoutUrl" />
+    <!-- csrt for log out-->
+    <form action="${logoutUrl}" method="post" id="logoutForm">
+        <input type="hidden"
+               name="${_csrf.parameterName}"
+               value="${_csrf.token}" />
+    </form>
+    <script>
+        function formSubmit() {
+            document.getElementById("logoutForm").submit();
+        }
+    </script>
+    <c:if test="${pageContext.request.userPrincipal.name != null}">
+        <h3>
+            管理员账号 | <a
+                href="javascript:formSubmit()"> 登出</a>
+        </h3>
+    </c:if>
     <h2>阿里云客户列表：</h2>
+
     <div id="search">
         <p>搜索:
             <div>

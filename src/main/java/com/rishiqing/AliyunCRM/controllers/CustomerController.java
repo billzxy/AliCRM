@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.rishiqing.AliyunCRM.model.Customer;
 import com.rishiqing.AliyunCRM.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -65,7 +66,7 @@ public class CustomerController {
         Customer customer = new Customer(name,phoneNo,emailAdd,verificationCode);
         return customerService.saveCustomer(customer);
     }
-
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "/getAllCustomers", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
     @ResponseBody
     public String getAllCustomerList(){
@@ -76,6 +77,7 @@ public class CustomerController {
         return JSON.toJSONString(mmp);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value="/customer",method=RequestMethod.GET, produces = "application/json; charset=utf-8")
     public String getCustomerById(@RequestParam String id, ModelMap mmp){
         if (id == null || id == "" || !id.matches("^\\d+$")) {
@@ -99,6 +101,7 @@ public class CustomerController {
         return "admin/customerDetail";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "/getCustomer", method = RequestMethod.POST, produces ="application/json; charset=utf-8")
     @ResponseBody
     public String getCustomerByBatch(@RequestBody Map<String,Object> map){
@@ -123,6 +126,7 @@ public class CustomerController {
         return JSON.toJSONString(mmp);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "/getCustomerCount", method = RequestMethod.GET)
     @ResponseBody
     public String getCustomerCount(){
@@ -137,7 +141,7 @@ public class CustomerController {
         map.put("maxResult",Integer.parseInt((String)map.get("maxResult")));
         List l =customerService.searchCustomer(map);
         if(l==null){
-            return "error";
+            return "WEB-INF/jsp/error";
         }
         String s=  JSON.toJSONString(l);
         return s;

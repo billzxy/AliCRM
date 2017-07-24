@@ -5,7 +5,7 @@
 
     <import resource="classpath:mybatis-jdbc.xml"/>
     <import resource="classpath:customerBeans.xml"/>
-
+    <import resource="spring-security.xml"/>
 
 
 </beans>

@@ -6,11 +6,12 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@page session="false"%>
 <html>
 <head>
     <meta charset="utf-8">
-    <title>日事清客户信息录入</title>
-    <!--TODO：封装jquery-->
+    <title>日事清新用户注册</title>
+    <link rel="shortcut icon" href="/images/rsq.ico"/>
     <script type="text/javascript" src="/js/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="/script/customerInfoInput.js"></script>
 </head>
@@ -28,8 +29,7 @@
         </ul>
     <div><a href="/login">管理员登录</a></div>
     <div>
-        <p>联系我们：<a href="http://www.rishiqing.com/">日事清</a></p>
+        <p>日事清官方网站：<a href="http://www.rishiqing.com/">日事清</a></p>
     </div>
-    <!--TODO:加些联系信息 链接到日事清官网-->
 </body>
 </html>

@@ -8,7 +8,7 @@ var code;
 var note;
 $(document).ready(function(){
     $("#submitButton").click(function () {
-        $("#submitButton").disabled=true;
+        $("#submitButton").attr("disabled",true);
         getInputs();
         var areInputsChecked = checkInputs();
         if(areInputsChecked){
@@ -125,7 +125,7 @@ function checkPhone(){
     if(phone.length<10||phone.length>11){
         return false;
     }
-    return "^\\d+$".test(phone);
+    return /^[0-9]*$/.test(phone);
 }
 
 function checkEmail() {

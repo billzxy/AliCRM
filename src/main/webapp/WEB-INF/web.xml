@@ -4,9 +4,19 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
-  <display-name>Archetype Created Web Application</display-name>
+
+  <filter>
+    <filter-name>springSecurityFilterChain</filter-name>
+    <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+
+  </filter>
+  <filter-mapping>
+    <filter-name>springSecurityFilterChain</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
   <welcome-file-list>
-    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>/</welcome-file>
   </welcome-file-list>
 
   <context-param>
@@ -14,6 +24,7 @@
     <param-value>WEB-INF/spring-context.xml</param-value>
 
   </context-param>
+
 
   <servlet>
     <servlet-name>springmvc</servlet-name>
@@ -35,5 +46,12 @@
 
   </listener>
 
-
+  <error-page>
+    <error-code>404</error-code>
+    <location>/NotFound</location>
+  </error-page>
+  <error-page>
+    <error-code>500</error-code>
+    <location>/Denied</location>
+  </error-page>
 </web-app>
