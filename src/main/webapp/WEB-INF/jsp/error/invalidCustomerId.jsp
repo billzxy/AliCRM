@@ -7,9 +7,11 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page session="false"%>
+
 <html>
 <head>
     <title>失败！</title>
+    <link rel="shortcut icon" href="/images/rsq.ico"/>
 </head>
 <body>
 <h2>无效的客户信息，请重试！</h2>

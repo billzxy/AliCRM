@@ -1,20 +1,18 @@
 <%--
   Created by IntelliJ IDEA.
   User: 117_John
-  Date: 7/21/2017
-  Time: 11:01 AM
+  Date: 7/24/2017
+  Time: 4:18 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@page session="false"%>
 
 <html>
 <head>
-    <title>失败！</title>
     <link rel="shortcut icon" href="/images/rsq.ico"/>
+    <title>405</title>
 </head>
 <body>
-<h2>无效的页码，请重试！</h2>
-<a href="/adminCustomerInfo">返回</a>
+<img src="/images/405.jpg" alt="出4错0了5">
 </body>
 </html>

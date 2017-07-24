@@ -7,11 +7,13 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page session="false"%>
+
 <html>
 <head>
+    <link rel="shortcut icon" href="/images/rsq.ico"/>
     <title>404</title>
 </head>
 <body>
-
+    <img src="/images/404.jpg" alt="找4不0到4">
 </body>
 </html>

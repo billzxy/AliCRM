@@ -33,4 +33,7 @@ public class MainController {
     @RequestMapping("/Forbidden")
     public String fourohthree(){return "error/403";}
 
+    @RequestMapping("/MethodNotAllowed")
+    public String fourohfive(){return "error/405";}
+
 }

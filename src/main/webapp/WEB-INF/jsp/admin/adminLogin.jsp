@@ -7,10 +7,10 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <html>
 <head>
     <title>登录</title>
+    <link rel="shortcut icon" href="/images/rsq.ico"/>
     <script type="text/javascript" src="/js/jquery-3.2.1.min.js"></script>
     <!--<script type="text/javascript" src="/script/loginAuth.js"></script>-->
 

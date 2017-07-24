@@ -7,11 +7,13 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page session="false"%>
+
 <html>
 <head>
+    <link rel="shortcut icon" href="/images/rsq.ico"/>
     <title>500</title>
 </head>
 <body>
-
+<img src="/images/500.jpg" alt="出5错0了0">
 </body>
 </html>

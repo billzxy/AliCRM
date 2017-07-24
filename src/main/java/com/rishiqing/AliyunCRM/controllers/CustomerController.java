@@ -9,9 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Created by 117_John on 7/19/2017.
@@ -88,16 +87,20 @@ public class CustomerController {
         if(c==null){
             return "error/invalidCustomerId";
         }
+        Date dateCreated = c.getDateCreated();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy年MM月dd日 HH时mm分ss秒");
+        String dateString = formatter.format(dateCreated);
+
         mmp.addAttribute("name",c.getName());
         mmp.addAttribute("emailAdd",c.getEmailAdd());
         mmp.addAttribute("phoneNo",c.getPhoneNo());
         mmp.addAttribute("verificationCode",c.getVerificationCode());
         mmp.addAttribute("note",c.getCustomerNote());
         mmp.addAttribute("adminNote",c.getAdminNote());
-        mmp.addAttribute("status",c.getCustomerStatus());
-        mmp.addAttribute("dateCreated",c.getDateCreated());
+        mmp.addAttribute("status",getStatus(c.getCustomerStatus()));
+        mmp.addAttribute("dateCreated",dateString);
         mmp.addAttribute("id",c.getId());
-        mmp.addAttribute("license",c.getRsqLicense());
+        mmp.addAttribute("license",getRsqLicense(c.getRsqLicense()));
         return "admin/customerDetail";
     }
 
@@ -141,11 +144,52 @@ public class CustomerController {
         map.put("maxResult",Integer.parseInt((String)map.get("maxResult")));
         List l =customerService.searchCustomer(map);
         if(l==null){
-            return "WEB-INF/jsp/error";
+            return "error";
         }
         String s=  JSON.toJSONString(l);
         return s;
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @RequestMapping(value="/modify",method=RequestMethod.POST, produces ="application/json; charset=utf-8")
+    @ResponseBody
+    public String modify(@RequestBody Map<String,Object> map){
+        Long id = Long.parseLong((String)map.get("id"));
+        map.put("status",Integer.parseInt((String)map.get("status")));
+        map.put("rsqLicense",Integer.parseInt((String)map.get("rsqLicense")));
+        map.put("id",id);
+        Long result =customerService.updateCustomerById(map);
+        if(result==0){
+            return "error";
+        }
+        return "success";
+    }
 
+    private String getStatus(int status){
+        if(status==0){
+            return "未处理";
+        }else if(status==1) {
+            return "已提交至销售部";
+        }else if(status==2){
+            return "已激活";
+        }else if(status==3){
+            return "其他";
+        }else{
+            return "无处理状态";
+        }
+    }
+
+    private String getRsqLicense(int license){
+        if(license==0){
+            return "未记录";
+        }else if(license==1) {
+            return "专业版";
+        }else if(license==2){
+            return "企业版";
+        }else if(license==3){
+            return "旗舰版";
+        }else{
+            return "无版本记录";
+        }
+    }
 }

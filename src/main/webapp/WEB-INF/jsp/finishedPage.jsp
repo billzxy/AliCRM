@@ -11,6 +11,7 @@
 <head>
     <meta charset="utf-8">
     <title>成功！</title>
+    <link rel="shortcut icon" href="/images/rsq.ico"/>
 </head>
 <body>
     <h2>信息添加成功，即将为您创建账户</h2>

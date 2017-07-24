@@ -23,8 +23,8 @@ public class CustomerService {
         customerDao.saveCustomer(customer);
         return 1;
     }
-    public long updateCustomerById(long id, Customer customer){
-        customerDao.updateCustomerById(id,customer);
+    public long updateCustomerById(Map<String,Object>map){
+        customerDao.updateCustomerById(map);
         return 1;
     }
     public long deleteCustomerById(long id){

@@ -13,6 +13,7 @@
         <intercept-url pattern="/customer*" access="ROLE_ADMIN" />
         <intercept-url pattern="/get*" access="ROLE_ADMIN" />
         <intercept-url pattern="/search*" access="ROLE_ADMIN" />
+        <intercept-url pattern="/modify*" access="ROLE_ADMIN" />
         <form-login
                 login-page="/login"
                 default-target-url="/adminCustomerInfo"

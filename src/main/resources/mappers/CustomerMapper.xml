@@ -59,13 +59,13 @@
             name LIKE "%${name}%"
         </if>
         <if test='phoneNo!=null and phoneNo!=""'>
-            OR phone LIKE "%${phoneNo}%"
+            AND phone LIKE "%${phoneNo}%"
         </if>
         <if test='emailAdd!=null and emailAdd!=""'>
-            OR email LIKE "%${emailAdd}%"
+            AND email LIKE "%${emailAdd}%"
         </if>
         <if test='verificationCode!=null and verificationCode!=""'>
-            OR verification_code = #{verificationCode}
+            AND verification_code = #{verificationCode}
         </if>
         <if test='rsqLicense!=4'>
             AND rsq_license = #{rsqLicense}
@@ -77,5 +77,21 @@
         ORDER BY id DESC
         LIMIT #{maxResult}
     </select>
+
+    <update id="updateCustomerById" parameterType="map">
+        UPDATE `customer`
+        <set>
+        <if test='adminNote!=null and adminNote!=""'>
+            admin_note = #{adminNote},
+        </if>
+        <if test='status!=4'>
+            customer_status = #{status},
+        </if>
+        <if test='rsqLicense!=4'>
+            rsq_license = #{rsqLicense}
+        </if>
+        </set>
+        WHERE id=${id}
+    </update>
 
 </mapper>

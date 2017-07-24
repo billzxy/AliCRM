@@ -12,7 +12,7 @@ import java.util.Map;
 @Repository("customerDao")
 public interface CustomerDao {
     long saveCustomer(Customer customer);
-    long updateCustomerById(long id, Customer customer);
+    long updateCustomerById(Map<String,Object>map);
     long deleteCustomerById(long id);
     Customer getCustomerById(long id);
     List<Customer> getAllCustomers();
