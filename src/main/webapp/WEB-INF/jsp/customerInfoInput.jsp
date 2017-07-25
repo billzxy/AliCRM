@@ -10,12 +10,62 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>日事清新用户注册</title>
+    <title>阿里云市场日事清新用户注册</title>
     <link rel="shortcut icon" href="<%=request.getContextPath()%>/images/rsq.ico"/>
     <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath()%>/script/customerInfoInput.js"></script>
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/rsq.css">
+    <style>
+        .bottomLine{
+            margin-bottom: 100px;
+        }
+    </style>
 </head>
 <body>
+<header class="mainHeader">
+    <div class="logo"></div>
+    <img class="wave" src="<%=request.getContextPath()%>/images/waveBg.png">
+</header>
+<div class="mainContainer">
+
+<div class="container showing" id="loginView">
+    <h3>欢迎使用日事清！</h3>
+    <div class="posR user">
+        <i class="iconUser"></i>
+        <ul class="searchResult" style="display: none;"></ul>
+        <input id="name_input" type="text" class="popInput" placeholder="输入您的用户名（不得包含符号）">
+    </div>
+    <div class="posR psw">
+    <i class="iconPhone"></i>
+    <ul class="searchResult" style="display: none;"></ul>
+    <input id="phone_input" type="text" class="popInput" placeholder="输入您的手机号">
+    </div>
+    <div class="posR psw">
+        <i class="iconEmail"></i>
+        <ul class="searchResult" style="display: none;"></ul>
+        <input id="email_input" type="text" class="popInput" placeholder="输入您的邮箱">
+    </div>
+
+    <div class="posR psw">
+        <i class="iconPsw"></i>
+        <ul class="searchResult" style="display: none;"></ul>
+        <input id="code_input" type="text" class="popInput" placeholder="输入您的阿里云验证码">
+    </div>
+    <div class="posR psw">
+        <i class="iconYzm"></i>
+        <input id="note_input" type="text" class="popInput" placeholder="输入备注信息（选填）">
+    </div>
+
+    <div class="errorPlace"></div>
+    <div class="btn" id="submitButton">提交注册</div>
+
+
+    <div class="bottomLine"><span class="toReg">日事清官方网站</span></div>
+
+
+</div>
+</div>
+<!--
     <h2>欢迎使用日事清</h2>
     <h3>请输入您的个人信息和阿里云验证码</h3>
         <ul id="customer_list">
@@ -31,5 +81,6 @@
     <div>
         <p>日事清官方网站：<a href="http://www.rishiqing.com/">日事清</a></p>
     </div>
+    -->
 </body>
 </html>

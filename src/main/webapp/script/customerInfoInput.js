@@ -17,8 +17,13 @@ $(document).ready(function(){
             }else{
                 submitInfo()
             }
+        }else{
+            $("#submitButton").removeAttr("disabled");
         }
     });
+    $(".toReg").click(function () {
+        window.location.href="http://www.rishiqing.com/"
+    })
 });
 
 function submitInfoWithNote() {

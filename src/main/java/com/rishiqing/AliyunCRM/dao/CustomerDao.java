@@ -16,7 +16,7 @@ public interface CustomerDao {
     long deleteCustomerById(long id);
     Customer getCustomerById(long id);
     List<Customer> getAllCustomers();
-    List<Customer> getCustomerByBatch(int max, int offset);
+    List<Customer> getCustomerByBatch(Map<String,Object>map);
     long getCustomerCount();
     List<Customer> searchCustomer(Map<String,Object> paramMap);
     //List<Customer> searchCustomer(String name,String phoneNo, String emailAdd, String verificationCode, Integer rsqLicense, Integer status,

@@ -55,7 +55,10 @@ public class CustomerService {
         return customers;
     }
     public List<Map<String,Object>> getCustomerByBatch(int showMax, int offset){
-        List<Customer> lc = customerDao.getCustomerByBatch(showMax, offset);
+        Map<String, Object> map=new HashMap<String, Object>();
+        map.put("offset",offset);
+        map.put("max",showMax);
+        List<Customer> lc = customerDao.getCustomerByBatch(map);
         List<Map<String,Object>> customers = new ArrayList<Map<String, Object>>();
         for(Customer c : lc){
             Map<String,Object> mmp = new HashMap<String, Object>();

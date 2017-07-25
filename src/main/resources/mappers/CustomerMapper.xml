@@ -44,9 +44,9 @@
         SELECT * FROM `customer` WHERE id=#{id}
     </select>
     <select id="getCustomerByBatch" resultMap="customerMap"
-            parameterType="java.lang.Integer"
+            parameterType="map"
             flushCache="true">
-        SELECT * FROM `customer` ORDER BY id DESC LIMIT #{1},#{0}
+        SELECT * FROM `customer` ORDER BY id DESC LIMIT #{offset},#{max}
     </select>
     <select id="getCustomerCount" resultType="java.lang.Long">
         SELECT COUNT(*) FROM `customer`
