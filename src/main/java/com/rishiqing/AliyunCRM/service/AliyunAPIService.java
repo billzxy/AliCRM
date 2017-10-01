@@ -4,27 +4,35 @@ import org.apache.commons.codec.binary.Base64;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.net.URL;
+import java.net.HttpURLConnection;
+import com.alibaba.fastjson.JSONObject;
 
 /**
  * Created by 117_John on 7/25/2017.
  */
 public class AliyunAPIService {
+    private static String[] REQUESTACTION = new String[]{"DescribeLicense","ActivateLicense"};
 
+    //No DB query action
     public static void main(String[] args)throws IOException{
-        System.out.println(genAPIRequestURL("abcde"));
+        int res = verifyCode("W671Y10PTBB3DMCQBMKFW-90VOVNWKNZGGV8AYOG19EPT_EL5XM3R1_MDJIPDS8A");
+        System.out.println(res);
     }
 
-    public static String genAPIRequestURL(String verificationCode) throws IOException{
+    private static String genAPIRequestURL(String verificationCode,int requestAction) throws IOException{
         String apiRequest=null;
         try{
-            apiRequest = genQueryString(verificationCode);
+            apiRequest = genQueryString(verificationCode,requestAction);
 
         }catch(Exception e){
             e.printStackTrace();
@@ -32,9 +40,43 @@ public class AliyunAPIService {
         return "https://market.aliyuncs.com/?"+apiRequest;
     }
 
+    public static int verifyCode(String vcode){
+        BufferedReader in;
+        try{
+            String url = genAPIRequestURL(vcode,0);//requestAction == "DescribeLicense"
+            URL obj = new URL(url);
+            HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+            con.setRequestMethod("GET");
 
+            int responseCode = con.getResponseCode();
+            System.out.println("Response Code : " + responseCode);
+            if (responseCode != 200 && responseCode!=201) {
+                return -2;//connection problem or request too frequent
+            }
+            in = new BufferedReader(
+                    new InputStreamReader(con.getInputStream()));
+            String inputLine;
+            StringBuffer response = new StringBuffer();
 
-
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+                //System.out.println(inputLine);
+            }
+            in.close();
+            String result = response.toString();
+            Map<String,Object> mp = JSONObject.parseObject(result);
+            String productName = (String)((Map)mp.get("License")).get("ProductName");
+            String licenseStatus = (String)((Map)mp.get("License")).get("LicenseStatus");
+            //System.out.println(productName);
+            if(licenseStatus.equals("INACTIVATED")){
+                //System.out.println(1);
+                return 1;
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return 0;
+    }
 
     private static String genSignature(String stringToSign)throws NoSuchAlgorithmException,UnsupportedEncodingException,
             InvalidKeyException{
@@ -48,15 +90,15 @@ public class AliyunAPIService {
         return new String(Base64.encodeBase64(signData));
     }
 
-    private static String genQueryString(String licenseCode)throws UnsupportedEncodingException,InvalidKeyException,NoSuchAlgorithmException{
+    private static String genQueryString(String licenseCode,int requestAction)throws UnsupportedEncodingException,InvalidKeyException,NoSuchAlgorithmException{
         final String HTTP_METHOD = "GET";
         final String accessKey = "LTAITWY6G7JwLeB6";
-        final String requestActionParam = "DescribeLicense";
+        final String requestActionParam = REQUESTACTION[requestAction];
         final String version = "2015-11-01";
         //final String version = "2014-05-26";
         final String signatureVersion = "1.0";
         final String signatureMethod = "HMAC-SHA1";
-        final String format = "XML";
+        final String format = "JSON";
         //final String licenseCode = "abcdefbasdce";
         //Date timeStamp = new Date();
         Map<String, String> parameters = new HashMap<String, String>();
@@ -96,7 +138,7 @@ public class AliyunAPIService {
                 canonicalizedQueryString.toString().substring(1)));
 
         String signature = genSignature(stringToSign.toString());
-        System.out.println("signature: "+signature);
+        //System.out.println("signature: "+signature);
         parameters.put("Signature",signature);
         return urlEncode(parameters);
 

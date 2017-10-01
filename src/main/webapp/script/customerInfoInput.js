@@ -46,7 +46,12 @@ function submitInfoWithNote() {
             success:function (data) {
                 if(data==="ok"){
                     redirectSuccess();
-                }else{
+                }else if(data==="400"){
+                    alert("阿里云服务器繁忙，请稍后再试！");
+                }else if(data==="idk") {
+                    alert("didnt do nothing lol")
+                }else {
+                    alert(data);
                     redirectFailed();
                 }
             }
@@ -70,9 +75,14 @@ function submitInfo(){
             timeout:60000,
             error:function () {alert("通讯失败，请重试");},
             success:function (data) {
-                if(data==="ok"){
+                if(data==="ok") {
                     redirectSuccess();
+                }else if(data==="400"){
+                    alert("阿里云服务器繁忙，请稍后再试！");
+                }else if(data==="idk") {
+                    alert("didnt do nothing lol")
                 }else{
+                    alert(data);
                     redirectFailed();
                 }
             }

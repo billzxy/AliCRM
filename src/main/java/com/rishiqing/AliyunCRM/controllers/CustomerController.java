@@ -2,6 +2,7 @@ package com.rishiqing.AliyunCRM.controllers;
 
 import com.alibaba.fastjson.JSON;
 import com.rishiqing.AliyunCRM.model.Customer;
+import com.rishiqing.AliyunCRM.service.AliyunAPIService;
 import com.rishiqing.AliyunCRM.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -21,6 +22,7 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
+
     @RequestMapping(value = "/saveInfoWNote", method = RequestMethod.POST)
     @ResponseBody
     public String saveCustomerInfoWithNote(@RequestBody Map<String,Object> map){
@@ -33,11 +35,19 @@ public class CustomerController {
         String verificationCode = (String)map.get("verificationCode");
         String note = (String)map.get("note");
 
-        long saveStatus = saveCustomer(name, emailAdd, phoneNo, verificationCode, note);
+        long saveStatus;
+        int vCodeStatus = verifyLicense(verificationCode);
+        if(vCodeStatus==1) {
+            saveStatus = saveCustomer(name, emailAdd, phoneNo, verificationCode,note);
+        }else if(vCodeStatus==-2){
+            return "400";
+        }else{
+            return "idk";
+        }
         if(saveStatus==1){
             return "ok";
         }else{
-            return "failed";
+            return "saving failed";
         }
     }
     @RequestMapping(value = "/saveInfo", method = RequestMethod.POST)
@@ -49,11 +59,19 @@ public class CustomerController {
         String emailAdd = (String)map.get("emailAdd");
         String phoneNo = (String)map.get("phoneNo");
         String verificationCode = (String)map.get("verificationCode");
-        long saveStatus = saveCustomer(name,emailAdd,phoneNo,verificationCode);
+        long saveStatus;
+        int vCodeStatus = verifyLicense(verificationCode);
+        if(vCodeStatus==1) {
+            saveStatus = saveCustomer(name, emailAdd, phoneNo, verificationCode);
+        }else if(vCodeStatus==-2){
+            return "400";
+        }else{
+            return "idk";
+        }
         if(saveStatus==1){
             return "ok";
         }else{
-            return "failed";
+            return "saving failed";
         }
     }
     private long saveCustomer(String name, String emailAdd, String phoneNo, String verificationCode, String note){
@@ -191,5 +209,13 @@ public class CustomerController {
         }else{
             return "无版本记录";
         }
+    }
+
+    private int verifyLicense(String vcode){
+        return AliyunAPIService.verifyCode(vcode);
+    }
+    private int activateLicense(String vcode){
+
+        return 0;
     }
 }
