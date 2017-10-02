@@ -35,13 +35,13 @@ public class CustomerController {
         String verificationCode = (String)map.get("verificationCode");
         String note = (String)map.get("note");
 
-        long saveStatus;
+        long saveStatus=0;
         int vCodeStatus = verifyLicense(verificationCode);
         if(vCodeStatus==1) {
             saveStatus = saveCustomer(name, emailAdd, phoneNo, verificationCode,note);
         }else if(vCodeStatus==-2){
             return "400";
-        }else{
+        }else if(vCodeStatus==0){
             return "idk";
         }
         if(saveStatus==1){
@@ -59,13 +59,13 @@ public class CustomerController {
         String emailAdd = (String)map.get("emailAdd");
         String phoneNo = (String)map.get("phoneNo");
         String verificationCode = (String)map.get("verificationCode");
-        long saveStatus;
+        long saveStatus=0;
         int vCodeStatus = verifyLicense(verificationCode);
         if(vCodeStatus==1) {
             saveStatus = saveCustomer(name, emailAdd, phoneNo, verificationCode);
         }else if(vCodeStatus==-2){
             return "400";
-        }else{
+        }else if(vCodeStatus==0){
             return "idk";
         }
         if(saveStatus==1){
